@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SC.Web</title>
+
+    <environment names="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/auth.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+    @Html.ApplicationInsightsJavaScript(TelemetryConfiguration)
+</head>
+<body>
+    @model RegisterViewModel
+    @{
+        Layout = null;
+    }
+
+    <div class="login">
+        <div class="login-triangle"></div>
+
+        <h2 class="login-header">Register</h2>
+
+        <form asp-controller="Account" asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="login-container">
+            <p><input asp-for="Email" type="email" placeholder="Email"></p>
+            <p><input asp-for="Password" type="password" placeholder="Password"></p>
+            <p><input asp-for="ConfirmPassword"  type="password" placeholder="ConfirmPassword" /></p>
+            <p><input type="submit" value="Register"></p>
+            <p><a asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]"><input type="button" value="Already a user? Click here to Login"></a></p>
+            
+        </form>
+    </div>
+
+
+    @section Scripts {
+        @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    }
+
+</body>
+</html>

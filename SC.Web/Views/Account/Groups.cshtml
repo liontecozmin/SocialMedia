@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Manage your groups";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+
+
+        <dt>Create Group:</dt>
+        <dd>
+            <a asp-controller="Account" asp-action="AddGroup" class="btn-bracketed">Create</a>
+        </dd>
+
+        <dt>Enter in new Group:</dt>
+        <dd>
+            <a asp-controller="Account" asp-action="InsertGroup" class="btn-bracketed">Enter</a>
+        </dd>
+
+        <dt>Leave Group:</dt>
+        <dd>
+            <a asp-controller="Account" asp-action="LeaveGroup" class="btn-bracketed">Leave</a>
+        </dd>
+
+        <dt>View All Groups:</dt>
+        <dd>
+            <a asp-controller="Account" asp-action="ViewAllGroups" class="btn-bracketed">View</a>
+        </dd>
+
+        <dt>View Your Groups:</dt>
+        <dd>
+            <a asp-controller="Account" asp-action="ViewYourGroups" class="btn-bracketed">View</a>
+        </dd>
+
+    </dl>
+</div>

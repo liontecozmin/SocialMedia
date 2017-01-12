@@ -1,0 +1,45 @@
+﻿@model Post
+
+@{
+    ViewData["Title"] = "Add and view posts";
+}
+
+<h2>@ViewData["Title"]</h2>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+
+
+        
+
+
+
+
+        <form asp-controller="Account" asp-action="ViewPosts" method="post" class="form-horizontal">
+            <div class="form-group">
+                <label  class="col-md-2 control-label">Add Post</label>
+                <dd>
+                    <a asp-controller="Account" asp-action="AddPost" class="btn-bracketed">Add</a>
+                </dd>
+            </div>
+
+                <div class="form-group">
+                    
+                        <label asp-for="group" class="col-md-2 control-label">View Posts from group </label>
+                        <div class="col-md-10">
+                            <input asp-for="group" class="form-control" />
+
+                        </div>
+                    </div>
+
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <button type="submit" class="btn btn-default">View</button>
+                    </div>
+                </div>
+</form>
+
+    </dl>
+</div>

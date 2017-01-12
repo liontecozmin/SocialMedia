@@ -1,0 +1,32 @@
+﻿@model Storage
+@{
+    ViewData["Title"] = " Groups";
+}
+
+<form asp-controller="Account" asp-action="ViewAllGroups" method="post" class="form-horizontal">
+
+
+
+    <div class="form-group">
+
+
+
+        <label asp-for="group[0].group_name" class="col-md-2 control-label">All Groups :</label>
+        </div>
+    
+
+        @for (int i = 0; i < Model.size_group; i++)
+            {<div class="form-group">
+        <label asp-for="group[0].group_name" class="col-md-2 control-label">@Model.group[i].group_name</label>
+
+    </div>
+        }
+
+
+  
+
+
+
+
+</form>
+

@@ -1,0 +1,41 @@
+﻿@model Storage
+@{
+    ViewData["Title"] = "View Posts";
+}
+
+<form asp-controller="Account" asp-action="ViewPosts" method="post" class="form-horizontal">
+
+
+
+    <div class="form-group">
+        <label asp-for="post[0].id" class="col-md-2 control-label">Nr.</label>
+        <label asp-for="post[0].email" class="col-md-2 control-label">From</label>
+        <label asp-for="post[0].message" class="col-md-2 control-label">Post</label>
+        <label asp-for="post[0].postDate" class="col-md-2 control-label">Date</label>
+
+    </div>
+
+
+    @for (int i = 0; i < Model.size_post; i++)
+    {
+
+        <div class="form-group">
+            <label asp-for="post[i].id" class="col-md-2 control-label">@Model.post[i].id</label>
+            <label asp-for="post[i].email" class="col-md-2 control-label">@Model.post[i].email</label>
+            <label asp-for="post[i].message" class="col-md-2 control-label">@Model.post[i].message</label>
+            <label asp-for="post[i].postDate" class="col-md-2 control-label">@Model.post[i].postDate</label>
+
+
+        </div>
+    }
+
+
+
+
+
+
+
+
+
+
+</form>

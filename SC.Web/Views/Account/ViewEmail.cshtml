@@ -1,0 +1,47 @@
+﻿@model Storage
+@{
+    ViewData["Title"] = "Email History";
+}
+
+<form asp-controller="Account" asp-action="ViewMail" method="post" class="form-horizontal">
+
+
+
+        <div class="form-group">
+                <label asp-for="mail[0].id" class="col-md-2 control-label">Nr.</label>
+                <label asp-for="mail[0].from" class="col-md-2 control-label">From</label>
+             <label asp-for="mail[0].to" class="col-md-2 control-label">To</label>
+ 
+                <label asp-for="mail[0].subject" class="col-md-2 control-label">Subject</label>
+              <label asp-for="mail[0].message" class="col-md-2 control-label">Message</label> 
+                <label asp-for="mail[0].emailDate" class="col-md-2 control-label">Date</label>
+            </div>
+
+
+        @for (int i = 0; i < Model.size; i++)
+        {
+
+            <div class="form-group">
+                <label asp-for="mail[i].id" class="col-md-2 control-label">@Model.mail[i].id</label>
+                <label asp-for="mail[i].from" class="col-md-2 control-label">@Model.mail[i].from</label>
+                  
+               <label asp-for="mail[i].to" class="col-md-2 control-label">@Model.mail[i].to</label>
+
+                <label asp-for="mail[i].subject" class="col-md-2 control-label"><a asp-controller="Account" asp-action="ViewMail"  >@Model.mail[i].subject</a></label>
+           @*  <label asp-for="mail[i].subject" class="col-md-2 control-label">@Model.mail[i].subject</label> *@
+             
+               <label asp-for="mail[i].message" class="col-md-2 control-label">@Model.mail[i].message</label>
+                <label asp-for="mail[i].emailDate" class="col-md-2 control-label">@Model.mail[i].emailDate</label>
+            </div>
+        }
+            
+
+
+
+
+
+
+
+
+
+</form>

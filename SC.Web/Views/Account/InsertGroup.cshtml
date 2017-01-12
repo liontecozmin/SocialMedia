@@ -1,0 +1,49 @@
+﻿
+
+@model Group
+@{
+    ViewData["Title"] = "Enter your preferred group";
+}
+
+<h2>@ViewData["Title"]</h2>
+<p class="text-success">@ViewData["StatusMessage"]</p>
+
+<dl class="dl-horizontal">
+
+
+    <dt>All Groups:</dt>
+    <dd>
+        <a asp-controller="Account" asp-action="ViewAllGroups" class="btn-bracketed">View All Available Groups</a>
+    </dd>
+
+    <dt>Your Groups:</dt>
+    <dd>
+        <a asp-controller="Account" asp-action="ViewYourGroups" class="btn-bracketed">View Your Groups</a>
+    </dd>
+
+
+</dl>
+
+<form asp-controller="Account" asp-action="InsertGroup" method="post" class="form-horizontal">
+
+    <hr />
+
+
+
+
+    <div class="form-group">
+        <label asp-for="group_name" class="col-md-2 control-label"> Type the group</label>
+        <div class="col-md-10">
+            <input asp-for="group_name" class="form-control" />
+
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="submit" class="btn btn-default">Send</button>
+        </div>
+    </div>
+</form>

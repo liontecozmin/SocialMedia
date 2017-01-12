@@ -1,0 +1,30 @@
+﻿@using SC.Web.DataBase.Profile;
+@model UserProfile
+@{
+    ViewData["Title"] = "Change your last name";
+}
+
+<h2>@ViewData["Title"]</h2>
+<form asp-controller="Manage" asp-action="ChangeLastName" method="post" class="form-horizontal">
+ 
+    <hr />
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="lastName" class="col-md-2 control-label">Last Name</label>
+        <div class="col-md-10">
+            <input asp-for="lastName" class="form-control" />
+            <span asp-validation-for="lastName" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="submit" class="btn btn-default">Save</button>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
