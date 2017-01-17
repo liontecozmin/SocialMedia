@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -158,7 +158,34 @@ namespace SC.Web.Controllers
 
             return View();
                }
-       
+
+
+        public IActionResult DeleteMail(string from, string to, string subject, string message)
+        {
+            ViewBag.from = from;
+            ViewBag.subject = subject;
+            ViewBag.message = message;
+            ViewBag.to = to;
+            GetUserMail();
+            var context = new EmailContext();
+            var EmailRepository = new EmailRepository();
+            var email1 = EmailRepository.FindEmail(from, to, subject, message);
+            if (email1.to == "")
+            {
+                string err = "Something went wrong. Try again!";
+                ViewData["StatusMessage"] = err;
+                return View("Emails");
+            }
+            context.Remove(email1);
+            context.SaveChanges();
+            string mesaj = "Email deleted";
+            ViewData["StatusMessage"] = mesaj;
+            return View("Emails");
+
+
+            return View();
+        }
+
         public IActionResult Emails()
         {
             ViewData["Message"] = "View and send emails";
