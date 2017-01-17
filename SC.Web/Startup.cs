@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Session;
+using Microsoft.AspNetCore.Html;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -52,6 +54,11 @@ namespace SC.Web
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
+            services.AddMemoryCache();
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.CookieName = ".MyApplication";
+            });
 
         }
 
@@ -79,6 +86,8 @@ namespace SC.Web
             app.UseStaticFiles();
 
             app.UseIdentity();
+
+            app.UseSession();
 
             // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
 
