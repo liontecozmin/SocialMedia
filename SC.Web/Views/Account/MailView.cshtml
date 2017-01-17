@@ -1,0 +1,25 @@
+﻿@model Email
+@{
+    ViewData["Title"] = "Email History";
+}
+
+
+<form asp-controller="Account" asp-action="ViewMail" method="post" class="form-horizontal">
+    <div class="form-group">
+        <label  class="col-md-2 control-label">From </label>
+        <label asp-for="from" class="col-md-2 control-label">@ViewBag.from </label>
+    </div>
+    <div class="form-group">
+        <label  class="col-md-2 control-label">Subject </label>
+        <label asp-for="subject" class="col-md-2 control-label">@ViewBag.subject </label>
+    </div>
+    <div class="form-group">
+        <label  class="col-md-2 control-label">Date </label>
+        <label asp-for="emailDate" class="col-md-2 control-label">@ViewBag.date </label>
+    </div>
+    <div class="form-group">
+        <label  class="col-md-2 control-label">Message </label>
+        <label asp-for="message" class="col-md-2 control-label">@ViewBag.message </label>
+    </div>
+
+</form>
