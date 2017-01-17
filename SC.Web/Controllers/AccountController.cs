@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using SC.Web.Models;
@@ -42,13 +43,10 @@ namespace SC.Web.Controllers
         {
             try
             {
-                if (ok == false)
-                {
-                    var user1 = await GetCurrentUserAsync();
-                    email_user = user1.Email;
-                    ok = true;
-                   
-                }
+
+                    //  var user1 = await GetCurrentUserAsync();
+                    email_user = HttpContext.Session.GetString("email");
+ 
             }
             catch (Exception e){}
         }
@@ -73,10 +71,10 @@ namespace SC.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddPost(Post model)
         {
-            //GetUserMail();
-            var user = await GetCurrentUserAsync();
+            GetUserMail();
+         //   var user = await GetCurrentUserAsync();
             var context = new PostContext();
-            var post = new Post(user.Email, model.group, DateTime.Now, model.message);
+            var post = new Post(email_user, model.group, DateTime.Now, model.message);
             context.Posts.Add(post);
             context.SaveChanges();
             string mesaj = "Your post has been added";
@@ -151,19 +149,16 @@ namespace SC.Web.Controllers
             return View(objects);
         }
 
-        /*       [HttpPost]
-               [HttpGet]
-               [ValidateAntiForgeryToken]
-               public async Task<IActionResult> ViewEmail()
+               public IActionResult MailView(string from,DateTime date,string subject,string message)
                {
-                   var user = await GetCurrentUserAsync();
-                   var mail = new Email();
-                   mail.subject = "subbiect";
-                   mail.to = "cineva";
+                   ViewBag.from = from;
+            ViewBag.date = date;
+            ViewBag.subject=subject;
+            ViewBag.message = message;
 
-                   return View(mail);
+            return View();
                }
-       */
+       
         public IActionResult Emails()
         {
             ViewData["Message"] = "View and send emails";
@@ -183,10 +178,10 @@ namespace SC.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddEmail(Email model)
         {
-             var user = await GetCurrentUserAsync();
-            //GetUserMail();
+            // var user = await GetCurrentUserAsync();
+            GetUserMail();
             var context = new EmailContext();
-            var email = new Email(user.Email,model.to,model.subject,model.message,DateTime.Now);
+            var email = new Email(email_user,model.to,model.subject,model.message,DateTime.Now);
             context.Emails.Add(email);
             context.SaveChanges();
             string mesaj = "Your email was sent";
@@ -206,10 +201,10 @@ namespace SC.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddGroup(Group model)
         {
-            var user = await GetCurrentUserAsync();
-
+            // var user = await GetCurrentUserAsync();
+            GetUserMail();
             var context = new GroupContext();
-            var group = new Group(user.Email, model.group_name);
+            var group = new Group(email_user, model.group_name);
             var GroupRepository = new GroupRepository();
             var group1 = GroupRepository.FindGroup(model.group_name);
             if(group1.group_name==group.group_name)
@@ -231,13 +226,13 @@ namespace SC.Web.Controllers
                 [ValidateAntiForgeryToken]
                 public async Task<IActionResult> InsertGroup(Group model)
                 {
-                        var user = await GetCurrentUserAsync();
-                        // GetUserMail();
+                        //var user = await GetCurrentUserAsync();
+                         GetUserMail();
                         var context = new GroupContext();
-                        var group = new Group(user.Email, model.group_name);
+                        var group = new Group(email_user, model.group_name);
 
                         var GroupRepository = new GroupRepository();
-                        var group1 = GroupRepository.FindByGroupName(user.Email, model.group_name);
+                        var group1 = GroupRepository.FindByGroupName(email_user, model.group_name);
                         if (group1.group_name == group.group_name && group1.email==group.email)
                             return View(model);
 
@@ -320,11 +315,11 @@ namespace SC.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> LeaveGroup(Group model)
         {
-           var user = await GetCurrentUserAsync();
-          //  GetUserMail();
+          // var user = await GetCurrentUserAsync();
+           GetUserMail();
             var context = new GroupContext();
             var GroupRepository = new GroupRepository();
-            var group1 = GroupRepository.FindByGroupName(user.Email, model.group_name);
+            var group1 = GroupRepository.FindByGroupName(email_user, model.group_name);
             if(group1.group_name=="")
                 return View(model);
             context.Remove(group1);
@@ -353,11 +348,12 @@ namespace SC.Web.Controllers
             {
                
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
-                email_user = model.Email;
+                
                 if (result.Succeeded)
                 {
                     _logger.LogInformation(1, "User logged in.");
-                    
+                    HttpContext.Session.SetString("email", model.Email);
+
                     return RedirectToLocal(returnUrl);
                 }
                   
@@ -397,6 +393,7 @@ namespace SC.Web.Controllers
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation(3, "User created a new account with password.");
+                    HttpContext.Session.SetString("email", model.Email);
                     UserProfileContext context = new UserProfileContext();
                     UserProfile user1 = new UserProfile(user.Email,"","");
                     context.Add(user1);
