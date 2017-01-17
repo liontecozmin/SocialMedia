@@ -1,48 +1,95 @@
-﻿@model Storage
-@{
-    ViewData["Title"] = "Email History";
+﻿@*
+
+
+
+
+*@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+            
+        }
+
+        tr:nth-of-type(odd) { 
+    background: #eee; 
+    }
+        th { 
+    background: #3498db; 
+    color: white; 
+    font-weight: bold; 
+    }
+
+        td, th {
+        padding: 10px; 
+        border: 1px solid #ccc; 
+        text-align: left; 
+        font-size: 18px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+        #table-wrapper {
+  position:relative;
+}
+#table-scroll {
+  height:450px;
+  overflow:auto;  
+  margin-top:20px;
 }
 
-<form asp-controller="Account" asp-action="ViewMail" method="post" class="form-horizontal">
+
+    </style>
+</head>
+<body>
+    @model Storage
+    @{
+        ViewData["Title"] = "Email History";
+    }
 
 
+    <div id="table-wrapper">
+        <div id="table-scroll">
+            <table>
+                <tr>
 
-        <div class="form-group">
-                <label asp-for="mail[0].id" class="col-md-2 control-label">Nr.</label>
-                <label asp-for="mail[0].from" class="col-md-2 control-label">From</label>
-            @* <label asp-for="mail[0].to" class="col-md-2 control-label">To</label> *@
- 
-                <label asp-for="mail[0].subject" class="col-md-2 control-label">Subject</label>
-          @*   <label asp-for="mail[0].message" class="col-md-2 control-label">Message</label>  *@
-                <label asp-for="mail[0].emailDate" class="col-md-2 control-label">Date</label>
+
+                    <th>  <label asp-for="mail[0].id" class="col-md-2 control-label">Nr.</label></th>
+                    <th>  <label asp-for="mail[0].from" class="col-md-2 control-label">From</label></th>
+
+
+                    <th> <label asp-for="mail[0].subject" class="col-md-2 control-label">Subject</label> </th>
+
+                    <th>  <label asp-for="mail[0].emailDate" class="col-md-2 control-label">Date</label> </th>
+
+                    <th>  <label  class="col-md-2 control-label"></label> </th>
+
+                </tr>
+
+                @for (int i = 0; i < Model.size; i++)
+            {
+                    <tr>
+
+                        <td>  <label asp-for="mail[i].id" class="col-md-2 control-label">@Model.mail[i].id</label> </td>
+                        <td>   <label asp-for="mail[i].from" class="col-md-2 control-label">@Model.mail[i].from</label> </td>
+
+
+                        <td>  <label asp-for="mail[i].subject" class="col-md-2 control-label"><a href="@Url.Action("MailView", new { from = @Model.mail[i].from,date = @Model.mail[i].emailDate, subject = @Model.mail[i].subject,message=Model.mail[i].message })">@Model.mail[i].subject</a></label> </td>
+
+
+                        <td>  <label asp-for="mail[i].emailDate" class="col-md-2 control-label">@Model.mail[i].emailDate</label> </td>
+
+                        <td> <a class="btn btn-default" href="@Url.Action("DeleteMail", new { from = @Model.mail[i].from,to=@Model.mail[i].to, subject = @Model.mail[i].subject, message = Model.mail[i].message })">Delete</a> </td>
+                    </tr>
+                }
+
+            </table>
             </div>
-
-
-        @for (int i = 0; i < Model.size; i++)
-        {
-
-            <div class="form-group">
-                <label asp-for="mail[i].id" class="col-md-2 control-label">@Model.mail[i].id</label>
-                <label asp-for="mail[i].from" class="col-md-2 control-label">@Model.mail[i].from</label>
-                  
-           @*    <label asp-for="mail[i].to" class="col-md-2 control-label">@Model.mail[i].to</label> *@
-
-              @*  <label asp-for="mail[i].subject" class="col-md-2 control-label"><a asp-controller="Account" asp-action="ViewMail"  >@Model.mail[i].subject</a></label> *@
-           @*  <label asp-for="mail[i].subject" class="col-md-2 control-label">@Model.mail[i].subject</label> *@
-                <label asp-for="mail[i].subject" class="col-md-2 control-label"><a href="@Url.Action("MailView", new { from = @Model.mail[i].from,date = @Model.mail[i].emailDate, subject = @Model.mail[i].subject,message=Model.mail[i].message })">@Model.mail[i].subject</a></label>
-                
-            @*   <label asp-for="mail[i].message" class="col-md-2 control-label">@Model.mail[i].message</label> *@
-                <label asp-for="mail[i].emailDate" class="col-md-2 control-label">@Model.mail[i].emailDate</label>
-            </div>
-        }
-            
-
-
-
-
-
-
-
-
-
-</form>
+        </div>
+</body>
+</html>

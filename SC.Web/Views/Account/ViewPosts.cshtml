@@ -1,34 +1,89 @@
-﻿@model Storage
-@{
-    ViewData["Title"] = "View Posts";
-}
-
-<form asp-controller="Account" asp-action="ViewPosts" method="post" class="form-horizontal">
+﻿@*
 
 
 
-    <div class="form-group">
-        <label asp-for="post[0].id" class="col-md-2 control-label">Nr.</label>
-        <label asp-for="post[0].email" class="col-md-2 control-label">From</label>
-        <label asp-for="post[0].message" class="col-md-2 control-label">Post</label>
-        <label asp-for="post[0].postDate" class="col-md-2 control-label">Date</label>
-
-    </div>
+*@
 
 
-    @for (int i = 0; i < Model.size_post; i++)
-    {
 
-        <div class="form-group">
-            <label asp-for="post[i].id" class="col-md-2 control-label">@Model.post[i].id</label>
-            <label asp-for="post[i].email" class="col-md-2 control-label">@Model.post[i].email</label>
-            <label asp-for="post[i].message" class="col-md-2 control-label">@Model.post[i].message</label>
-            <label asp-for="post[i].postDate" class="col-md-2 control-label">@Model.post[i].postDate</label>
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+       table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+            
+        }
 
-
-        </div>
+        tr:nth-of-type(odd) { 
+    background: #eee; 
+    }
+        th { 
+    background: #3498db; 
+    color: white; 
+    font-weight: bold; 
     }
 
+        td, th {
+        padding: 10px; 
+        border: 1px solid #ccc; 
+        text-align: left; 
+        font-size: 18px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+        #table-wrapper {
+  position:relative;
+}
+#table-scroll {
+  height:450px;
+  overflow:auto;  
+  margin-top:20px;
+}
+
+    </style>
+</head>
+<body>
+
+    @model Storage
+    @{
+        ViewData["Title"] = "View Posts";
+    }
+
+    <div id="table-wrapper">
+        <div id="table-scroll">
+            <table>
+                <tr>
+                    <th><label asp-for="post[0].id" class="col-md-2 control-label">Nr.</label></th>
+                    <th><label asp-for="post[0].email" class="col-md-2 control-label">From</label></th>
+                    <th><label asp-for="post[0].message" class="col-md-2 control-label">Post</label></th>
+                    <th><label asp-for="post[0].postDate" class="col-md-2 control-label">Date</label></th>
+                </tr>
+
+
+                @for (int i = 0; i < Model.size_post; i++)
+                {
+                    <tr>
+
+                        <td> <label asp-for="post[i].id" class="col-md-2 control-label">@Model.post[i].id</label> </td>
+                        <td> <label asp-for="post[i].email" class="col-md-2 control-label">@Model.post[i].email</label></td>
+                        <td> <label asp-for="post[i].message" class="col-md-2 control-label">@Model.post[i].message</label> </td>
+                        <td>  <label asp-for="post[i].postDate" class="col-md-2 control-label">@Model.post[i].postDate</label> </td>
+
+                    </tr>
+
+                }
+
+            </table>
+            </div>
+        </div>
+
+</body>
+</html>
 
 
 
@@ -38,4 +93,5 @@
 
 
 
-</form>
+
+

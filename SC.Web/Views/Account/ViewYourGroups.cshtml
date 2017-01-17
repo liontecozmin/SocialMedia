@@ -1,31 +1,71 @@
-﻿@model Storage
-@{
-    ViewData["Title"] = " Groups";
-}
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+            
+        }
 
-<form asp-controller="Account" asp-action="ViewYourGroups" method="post" class="form-horizontal">
-
-
-
-    <div class="form-group">
-
-
-
-        <label asp-for="group[0].group_name" class="col-md-2 control-label">Your Groups :</label>
-    </div>
-
-
-    @for (int i = 0; i < Model.size_group; i++)
-            {<div class="form-group">
-        <label asp-for="group[0].group_name" class="col-md-2 control-label">@Model.group[i].group_name</label>
-
-    </div>
+        tr:nth-of-type(odd) { 
+    background: #eee; 
+    }
+        th { 
+    background: #3498db; 
+    color: white; 
+    font-weight: bold; 
     }
 
+        td, th {
+        padding: 10px; 
+        border: 1px solid #ccc; 
+        text-align: left; 
+        font-size: 18px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+        #table-wrapper {
+  position:relative;
+}
+#table-scroll {
+  height:450px;
+  overflow:auto;  
+  margin-top:20px;
+}
+    </style>
+</head>
+<body>
+
+    @model Storage
+    @{
+        ViewData["Title"] = " Groups";
+    }
+
+    <div id="table-wrapper">
+        <div id="table-scroll">
+            <table align="center">
+
+                <tr><th><label asp-for="group[0].group_name" class="col-md-2 control-label">Your Groups :</label></th></tr>
 
 
 
+                @for (int i = 0; i < Model.size_group; i++)
+                {
 
+                    <tr>
+                        <td>
+                            <label asp-for="group[0].group_name" class="col-md-2 control-label">@Model.group[i].group_name</label>
+                        </td>
+                    </tr>
 
+                }
+            </table>
+            </div>
+        </div>
 
-</form>
+</body>
+</html>

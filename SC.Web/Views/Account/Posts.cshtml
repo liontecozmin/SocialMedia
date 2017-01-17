@@ -1,36 +1,45 @@
-﻿@model Post
+﻿<!DOCTYPE html>
+<html>
+<head>
+   
+    <style>
 
-@{
-    ViewData["Title"] = "Add and view posts";
-}
+    </style>
+</head>
+<body>
 
-<h2>@ViewData["Title"]</h2>
-<div>
-    <hr />
-    <dl class="dl-horizontal">
+    @model Post
+
+    @{
+        ViewData["Title"] = "Add and view posts";
+    }
+
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
 
 
-        
 
 
 
 
-        <form asp-controller="Account" asp-action="ViewPosts" method="post" class="form-horizontal">
-            <div class="form-group">
-                <label  class="col-md-2 control-label">Add Post</label>
-                <dd>
-                    <a asp-controller="Account" asp-action="AddPost" class="btn-bracketed">Add</a>
-                </dd>
-            </div>
+
+            <form asp-controller="Account" asp-action="ViewPosts" method="post" class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Add Post</label>
+                    <dd>
+                        <a asp-controller="Account" asp-action="AddPost" class="btn-bracketed">Add</a>
+                    </dd>
+                </div>
 
                 <div class="form-group">
-                    
-                        <label asp-for="group" class="col-md-2 control-label">View Posts from group </label>
-                        <div class="col-md-10">
-                            <input asp-for="group" class="form-control" />
 
-                        </div>
+                    <label asp-for="group" class="col-md-2 control-label">View Posts from group </label>
+                    <div class="col-md-10">
+                        <input asp-for="group" class="form-control" />
+
                     </div>
+                </div>
 
 
 
@@ -39,7 +48,11 @@
                         <button type="submit" class="btn btn-default">View</button>
                     </div>
                 </div>
-</form>
+            </form>
 
-    </dl>
-</div>
+        </dl>
+    </div>
+
+ 
+    </body>
+</html>

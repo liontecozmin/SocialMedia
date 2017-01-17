@@ -1,25 +1,73 @@
-﻿@model Email
-@{
-    ViewData["Title"] = "Email History";
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <style>
+       table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+            
+        }
+
+        tr:nth-of-type(odd) { 
+    background: #eee; 
+    }
+        th { 
+    background: #3498db; 
+    color: white; 
+    font-weight: bold; 
+    }
+
+        td, th {
+        padding: 10px; 
+        border: 1px solid #ccc; 
+        text-align: left; 
+        font-size: 18px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+        #table-wrapper {
+  position:relative;
 }
+#table-scroll {
+  height:450px;
+  overflow:auto;  
+  margin-top:20px;
+}
+    </style>
+</head>
+<body>
 
+    @model Email
+    @{
+        ViewData["Title"] = "Email History";
+    }
+    <div id="table-wrapper">
+        <div id="table-scroll">
 
-<form asp-controller="Account" asp-action="ViewMail" method="post" class="form-horizontal">
-    <div class="form-group">
-        <label  class="col-md-2 control-label">From </label>
-        <label asp-for="from" class="col-md-2 control-label">@ViewBag.from </label>
-    </div>
-    <div class="form-group">
-        <label  class="col-md-2 control-label">Subject </label>
-        <label asp-for="subject" class="col-md-2 control-label">@ViewBag.subject </label>
-    </div>
-    <div class="form-group">
-        <label  class="col-md-2 control-label">Date </label>
-        <label asp-for="emailDate" class="col-md-2 control-label">@ViewBag.date </label>
-    </div>
-    <div class="form-group">
-        <label  class="col-md-2 control-label">Message </label>
-        <label asp-for="message" class="col-md-2 control-label">@ViewBag.message </label>
-    </div>
+            <table>
+                <tr>
+                    <th> <label class="col-md-2 control-label">From </label> </th>
+                    <th>  <label asp-for="from" class="col-md-2 control-label">@ViewBag.from </label> </th>
+                </tr>
+                <tr>
+                    <th>  <label class="col-md-2 control-label">Subject </label></th>
+                    <th> <label asp-for="subject" class="col-md-2 control-label">@ViewBag.subject </label></th>
+                </tr>
+                <tr>
+                    <th><label class="col-md-2 control-label">Date </label></th>
+                    <th> <label asp-for="emailDate" class="col-md-2 control-label">@ViewBag.date </label></th>
+                </tr>
+                <tr>
+                    <td> <label class="col-md-2 control-label">Message </label></td>
+                    <td>  <label asp-for="message" class="col-md-2 control-label">@ViewBag.message </label></td>
+                </tr>
 
-</form>
+            </table>
+            </div>
+        </div>
+
+</body>
+</html>

@@ -1,22 +1,72 @@
-﻿@{
-    ViewData["Title"] = "Manage your emails";
-}
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 50%;
+        }
 
-<h2>@ViewData["Title"]</h2>
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        
+        tr:nth-of-type(odd) {
+            background: #eee;
+        }
 
-        <dt>Send Emails:</dt>
-        <dd>
-            <a asp-controller="Account" asp-action="AddEmail" class="btn-bracketed">Send</a>
-        </dd>
+        th {
+            background: #3498db;
+            color: white;
+            font-weight: bold;
+        }
 
-        <dt>View Emails:</dt>
-        <dd>
-            <a asp-controller="Account" asp-action="ViewEmail" class="btn-bracketed">View</a>
-        </dd>
+        td, th {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+            font-size: 18px;
+        }
 
-    </dl>
-</div>
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+        #table-wrapper {
+            position: relative;
+        }
+
+        #table-scroll {
+            height: 450px;
+            overflow: auto;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    @{
+        ViewData["Title"] = "Manage your emails";
+    }
+    <p class="text-success">@ViewData["StatusMessage"]</p>
+
+
+    <table align="center">
+        <tr>
+
+
+            <th>  <label  class="col-md-2 control-label">Send_Emails</label></th>
+            <th> <a class="btn btn-default" href="@Url.Action("AddEmail")">Send</a></th>
+
+
+        </tr>
+
+
+        <tr>
+
+
+            <td>  <label class="col-md-2 control-label">View_Emails</label></td>
+            <td> <a class="btn btn-default" href="@Url.Action("ViewEmail")">View</a></td>
+
+
+        </tr>
+
+    </table>
