@@ -1,40 +1,81 @@
-﻿@model IndexViewModel
-@{
-    ViewData["Title"] = "Change your account settings";
-}
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 50%;
+        }
+
+        tr:nth-of-type(odd) {
+            background: #eee;
+        }
+
+        th {
+            background: #3498db;
+            color: white;
+            font-weight: bold;
+        }
+
+        td, th {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+            font-size: 18px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+        #table-wrapper {
+            position: relative;
+        }
+
+        #table-scroll {
+            height: 450px;
+            overflow: auto;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    @model IndexViewModel
+    @{
+        ViewData["Title"] = "Change your account settings";
+    }
+
+    <p class="text-success">@ViewData["StatusMessage"]</p>
+
+    <table align="center">
+        <tr>
 
 
-<p class="text-success">@ViewData["StatusMessage"]</p>
-<h2>@ViewData["Title"]</h2>
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>Password:</dt>
-        <dd>
-            @if (Model.HasPassword)
-            {
-                <a asp-controller="Manage" asp-action="ChangePassword" class="btn-bracketed">Change</a>
-            }
-            else
-            {
-                <a asp-controller="Manage" asp-action="SetPassword" class="btn-bracketed">Create</a>
-            }
-        </dd>
-
-        <dt>First Name:</dt>
-        <dd>                      
-                <a asp-controller="Manage" asp-action="ChangeFirstName" class="btn-bracketed">Edit</a>                    
-        </dd>
-
-        <dt>Last Name:</dt>
-        <dd>
-            <a asp-controller="Manage" asp-action="ChangeLastName" class="btn-bracketed">Edit</a>
-        </dd>
+            <th>  <label class="col-md-2 control-label">Password</label></th> 
+            <th> <a class="btn btn-default" href="@Url.Action("ChangePassword")">Change</a></th>
 
 
+        </tr>
 
 
+        <tr>
 
 
-    </dl>
-</div>
+            <td>  <label class="col-md-2 control-label">First_Name</label></td>
+            <td> <a class="btn btn-default" href="@Url.Action("ChangeFirstName")">Change</a></td>
+
+
+        </tr>
+
+        <tr>
+
+
+            <th>  <label class="col-md-2 control-label">Last_Name</label></th>
+            <th> <a class="btn btn-default" href="@Url.Action("ChangeLastName")">Change</a></th>
+
+
+        </tr>
+
+    </table>
