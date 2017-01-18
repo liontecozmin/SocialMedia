@@ -112,6 +112,4 @@
 -r:"C:\Users\Tarciziu\.nuget\packages\System.Xml.ReaderWriter\4.0.11\ref\netstandard1.3\System.Xml.ReaderWriter.dll"
 -r:"C:\Users\Tarciziu\.nuget\packages\System.Xml.XDocument\4.0.11\ref\netstandard1.3\System.Xml.XDocument.dll"
 -r:"C:\Users\Tarciziu\Documents\Visual Studio 2015\Projects\SC\SC.Core\bin\Debug\netcoreapp1.0\SC.Core.dll"
-"C:\Users\Tarciziu\Documents\Visual Studio 2015\Projects\SC\SC.Infrastructure\UserContext.cs"
-"C:\Users\Tarciziu\Documents\Visual Studio 2015\Projects\SC\SC.Infrastructure\UserRepository.cs"
 "C:\Users\Tarciziu\Documents\Visual Studio 2015\Projects\SC\SC.Infrastructure\Properties\AssemblyInfo.cs"
