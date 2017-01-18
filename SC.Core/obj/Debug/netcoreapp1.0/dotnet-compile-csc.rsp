@@ -83,8 +83,5 @@
 -r:"C:\Users\Tarciziu\.nuget\packages\System.Xml.ReaderWriter\4.0.11\ref\netstandard1.3\System.Xml.ReaderWriter.dll"
 -r:"C:\Users\Tarciziu\.nuget\packages\System.Xml.XDocument\4.0.11\ref\netstandard1.3\System.Xml.XDocument.dll"
 -resource:"C:\Users\Tarciziu\Documents\Visual Studio 2015\Projects\SC\SC.Core\obj\Debug\netcoreapp1.0\SC.Coredotnet-compile.deps.json",SC.Core.deps.json
-"C:\Users\Tarciziu\Documents\Visual Studio 2015\Projects\SC\SC.Core\IUserRepository.cs"
-"C:\Users\Tarciziu\Documents\Visual Studio 2015\Projects\SC\SC.Core\Student.cs"
-"C:\Users\Tarciziu\Documents\Visual Studio 2015\Projects\SC\SC.Core\Teacher.cs"
-"C:\Users\Tarciziu\Documents\Visual Studio 2015\Projects\SC\SC.Core\User.cs"
+"C:\Users\Tarciziu\Documents\Visual Studio 2015\Projects\SC\SC.Core\Class.cs"
 "C:\Users\Tarciziu\Documents\Visual Studio 2015\Projects\SC\SC.Core\Properties\AssemblyInfo.cs"
