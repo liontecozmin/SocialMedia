@@ -58,10 +58,10 @@
         <div id="table-scroll">
             <table>
                 <tr>
-                    <th><label asp-for="post[0].id" class="col-md-2 control-label">Nr.</label></th>
-                    <th><label asp-for="post[0].email" class="col-md-2 control-label">From</label></th>
-                    <th><label asp-for="post[0].message" class="col-md-2 control-label">Post</label></th>
-                    <th><label asp-for="post[0].postDate" class="col-md-2 control-label">Date</label></th>
+                    <th><label asp-for="post[0].Id" class="col-md-2 control-label">Nr.</label></th>
+                    <th><label asp-for="post[0].Email" class="col-md-2 control-label">From</label></th>
+                    <th><label asp-for="post[0].Message" class="col-md-2 control-label">Post</label></th>
+                    <th><label asp-for="post[0].PostDate" class="col-md-2 control-label">Date</label></th>
                 </tr>
 
 
@@ -69,10 +69,10 @@
                 {
                     <tr>
 
-                        <td> <label asp-for="post[i].id" class="col-md-2 control-label">@Model.post[i].id</label> </td>
-                        <td> <label asp-for="post[i].email" class="col-md-2 control-label">@Model.post[i].email</label></td>
-                        <td> <label asp-for="post[i].message" class="col-md-2 control-label">@Model.post[i].message</label> </td>
-                        <td>  <label asp-for="post[i].postDate" class="col-md-2 control-label">@Model.post[i].postDate</label> </td>
+                        <td> <label asp-for="post[i].Id" class="col-md-2 control-label">@Model.post[i].Id</label> </td>
+                        <td> <label asp-for="post[i].Email" class="col-md-2 control-label">@Model.post[i].Email</label></td>
+                        <td> <label asp-for="post[i].Message" class="col-md-12 control-label">@Model.post[i].Message</label> </td>
+                        <td>  <label asp-for="post[i].PostDate" class="col-md-2 control-label">@Model.post[i].PostDate</label> </td>
 
                     </tr>
 

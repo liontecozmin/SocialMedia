@@ -1,0 +1,167 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <style>
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width:100%;
+            
+        }
+
+        tr:nth-of-type(odd) { 
+    background: #eee; 
+    }
+        th { 
+    background: #3498db; 
+    color: white; 
+    font-weight: bold; 
+    }
+
+        td, th {
+        padding: 10px; 
+        border: 1px solid #ccc; 
+        text-align: left; 
+        font-size: 18px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+        #table-wrapper {
+  position:relative;
+}
+#table-scroll {
+  height:450px;
+  overflow:auto;  
+  margin-top:20px;
+}
+
+        #left {
+            width: 25%;
+            float: left;
+           padding:5px;
+           top:50px;
+           position:fixed;
+           left:10px;
+
+
+           
+        }
+
+        #right {
+            float: right;
+            width: 25%;
+            padding:5px;
+            position:fixed;
+            right:5px;
+        }
+
+        #middle {
+            position: relative;
+            left: 0;
+            right: 0;
+            margin: auto;
+            width:60%;
+            padding:5px;
+        }
+
+    </style>
+</head>
+<body>
+
+
+    @{
+        ViewData["Title"] = "Home Page";
+    }
+
+    <div id="left">
+        <table align="center">
+            <tr><th><label>Settings :</label></th></tr>
+   
+
+                <tr>
+                    <td><a href="@Url.Action("AddEmail")">Send Emails</a></td>
+                </tr>
+
+            <tr>
+                <td><a href="@Url.Action("ViewEmail")">View Emails</a></td>
+            </tr>
+
+            <tr>
+                <td><a href="@Url.Action("ChangePassword","Manage")">Change Password</a></td>
+            </tr>
+
+            <tr>
+                <td><a href="@Url.Action("ChangeFirstName","Manage")">Change First Name</a></td>
+            </tr>
+
+            <tr>
+                <td><a href="@Url.Action("ChangeLastName","Manage")">Change Last Name</a></td>
+            </tr>
+
+
+
+
+
+         
+        </table>
+
+    </div>
+
+
+    <div id="right">
+        <table align="center">
+
+            <tr><th><label>Your Groups :</label></th></tr>
+            @for (int i = 0; i < ViewBag.objects.size_group; i++)
+            {
+                <tr>
+                    <td><a href="@Url.Action("ViewPosts", new { group=ViewBag.objects.group[i].Group_name })">@ViewBag.objects.group[i].Group_name</a></td>
+                </tr>
+            }
+
+
+        </table>
+    </div>
+
+
+
+    <div id="middle">
+        <table align="center">
+
+            <tr><th><label>News :</label></th></tr>
+            <tr>
+                <td>
+                    <table align="center">
+
+
+                        @for (int i = ViewBag.objects1.size_post - 1; i >= 0; i = i - 2)
+                        {
+                            <tr><th><label class="col-md-12 control-label">@ViewBag.objects1.post[i].Email in  @ViewBag.objects1.post[i].Group</label></th></tr>
+                            <tr>
+                                <td><label>Date @ViewBag.objects1.post[i].PostDate</label></td>
+                            </tr>
+                            <tr>
+                                <td><label class="col-md-12 control-label" href="@Url.Action("ViewPosts", new { group=ViewBag.objects1.post[i].Group })">@ViewBag.objects1.post[i].Message</label></td>
+                                @*<td><a class="col-md-6 control-label" href="@Url.Action("ViewPosts", new { group=ViewBag.objects1.post[i].group })">@ViewBag.objects1.post[i].message</a></td> *@
+                            </tr>
+                        }
+
+
+                    </table>
+                </td>
+            </tr>
+
+
+
+
+
+        </table>
+    </div>
+
+
+
+</body>
+</html>

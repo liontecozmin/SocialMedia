@@ -59,13 +59,13 @@
                 <tr>
 
 
-                    <th>  <label asp-for="mail[0].id" class="col-md-2 control-label">Nr.</label></th>
-                    <th>  <label asp-for="mail[0].from" class="col-md-2 control-label">From</label></th>
+                    <th>  <label asp-for="mail[0].Id" class="col-md-2 control-label">Nr.</label></th>
+                    <th>  <label asp-for="mail[0].From" class="col-md-2 control-label">From</label></th>
 
 
-                    <th> <label asp-for="mail[0].subject" class="col-md-2 control-label">Subject</label> </th>
+                    <th> <label asp-for="mail[0].Subject" class="col-md-2 control-label">Subject</label> </th>
 
-                    <th>  <label asp-for="mail[0].emailDate" class="col-md-2 control-label">Date</label> </th>
+                    <th>  <label asp-for="mail[0].EmailDate" class="col-md-2 control-label">Date</label> </th>
 
                     <th>  <label  class="col-md-2 control-label"></label> </th>
 
@@ -75,16 +75,16 @@
             {
                     <tr>
 
-                        <td>  <label asp-for="mail[i].id" class="col-md-2 control-label">@Model.mail[i].id</label> </td>
-                        <td>   <label asp-for="mail[i].from" class="col-md-2 control-label">@Model.mail[i].from</label> </td>
+                        <td>  <label asp-for="mail[i].Id" class="col-md-2 control-label">@Model.mail[i].Id</label> </td>
+                        <td>   <label asp-for="mail[i].From" class="col-md-2 control-label">@Model.mail[i].From</label> </td>
 
 
-                        <td>  <label asp-for="mail[i].subject" class="col-md-2 control-label"><a href="@Url.Action("MailView", new { from = @Model.mail[i].from,date = @Model.mail[i].emailDate, subject = @Model.mail[i].subject,message=Model.mail[i].message })">@Model.mail[i].subject</a></label> </td>
+                        <td>  <label asp-for="mail[i].Subject" class="col-md-2 control-label"><a href="@Url.Action("MailView", new { from = @Model.mail[i].From,date = @Model.mail[i].EmailDate, subject = @Model.mail[i].Subject,message=Model.mail[i].Message })">@Model.mail[i].Subject</a></label> </td>
 
 
-                        <td>  <label asp-for="mail[i].emailDate" class="col-md-2 control-label">@Model.mail[i].emailDate</label> </td>
+                        <td>  <label asp-for="mail[i].EmailDate" class="col-md-2 control-label">@Model.mail[i].EmailDate</label> </td>
 
-                        <td> <a class="btn btn-default" href="@Url.Action("DeleteMail", new { from = @Model.mail[i].from,to=@Model.mail[i].to, subject = @Model.mail[i].subject, message = Model.mail[i].message })">Delete</a> </td>
+                        <td> <a class="btn btn-default" href="@Url.Action("DeleteMail", new { from = @Model.mail[i].From,to=@Model.mail[i].To, subject = @Model.mail[i].Subject, message = Model.mail[i].Message })">Delete</a> </td>
                     </tr>
                 }
 

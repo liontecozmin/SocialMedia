@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -32,7 +34,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a asp-area="" asp-controller="Account" asp-action="Index">Home</a></li>
                     <li><a asp-area="" asp-controller="Account" asp-action="Posts">Posts</a></li>
                     <li><a asp-area="" asp-controller="Account" asp-action="Emails">Emails</a></li>
                     <li><a asp-area="" asp-controller="Account" asp-action="Groups">Groups</a></li>
@@ -70,3 +72,64 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
+
+@*
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CSS Layouts</title>
+    <style type="text/css">
+        #header {
+            width: 100%;
+            margin: auto;
+        }
+
+        #left {
+            width: 30%;
+            float: left;
+            margin: auto auto auto 2%;
+        }
+
+        #right {
+            float: right;
+            width: 30%;
+            margin: auto 2% auto auto;
+        }
+
+        #middle {
+            position: relative;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+
+        #footer {
+            width: 100%;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <!-- HEADER CONTENT GOES HERE -->
+    </div>
+    <div id="left">
+        <!-- LEFT COLUMN CONTENT GOES HERE -->
+    </div>
+    <div id="right">
+        <!-- RIGHT COLUMN CONTENT GOES HERE -->
+    </div>
+    <div id="middle">
+        <!-- MIDDLE COLUMN CONTENT GOES HERE -->
+    </div>
+    <div id="footer">
+        <!-- FOOTER CONTENT GOES HERE -->
+    </div>
+</body>
+</html>
+
+*@
+
+
+
