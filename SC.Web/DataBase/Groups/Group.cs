@@ -9,26 +9,26 @@ namespace SC.Web
     public class Group
     {
     [Key]
-    public int id { get; set; }
+    public int Id { get; set; }
         [Required]
-        public string email { get; set; }
+        public string Email { get; set; }
         [Required]
-        public string group_name { get; set; }
+        public string Group_name { get; set; }
     
 
     public Group(string _email, string _group)
     {
-        email = _email;
-        group_name = _group;
+        Email = _email;
+        Group_name = _group;
         
 
     }
 
     public Group()
     {
-        id = 1000;
-        email = "";
-        group_name = "";
+        Id = 1000;
+        Email = "";
+        Group_name = "";
 
     }
 }

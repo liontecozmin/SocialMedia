@@ -10,31 +10,31 @@ namespace SC.Web
     {
 
         [Key]
-        public int id { get; set; }
-
-        public string email { get; set; }
-
-        public string group { get; set; }
-
-        public DateTime postDate {get; set;}
-
-        public string message { get; set; }
+        public int Id { get; set; }
+        [Required]
+        public string Email { get; set; }
+        [Required]
+        public string Group { get; set; }
+        [Required]
+        public DateTime PostDate {get; set;}
+        [Required]
+        public string Message { get; set; }
 
         public Post(string mail,string grp,DateTime date,string mess)
         {
-            email = mail;
-            group = grp;
-            postDate = date;
-            message = mess;
+            Email = mail;
+            Group = grp;
+            PostDate = date;
+            Message = mess;
         }
 
         public Post()
         {
-            id = 1;
-            email = "";
-            group = "";
-            postDate = DateTime.Now;
-            message = "";
+            Id = 1;
+            Email = "";
+            Group = "";
+            PostDate = DateTime.Now;
+            Message = "";
         }
 
 

@@ -9,27 +9,27 @@ namespace SC.Web.DataBase.Profile
     public class UserProfile
     {
         [Key]
-        public int id { get; set; }
+        public int Id { get; set; }
 
-        public string email { get; set; }
+        public string Email { get; set; }
 
-        public string firstName { get; set; }
+        public string FirstName { get; set; }
 
-        public string lastName { get; set; }
+        public string LastName { get; set; }
 
         public UserProfile(string mail, string fname, string lname)
         {
-            email = mail;
-            firstName = fname;
-            lastName = lname;
+            Email = mail;
+            FirstName = fname;
+            LastName = lname;
         }
 
         public UserProfile()
         {
-            id = 1000;
-            email = "";
-            firstName = "";
-            lastName = "";
+            Id = 1000;
+            Email = "";
+            FirstName = "";
+            LastName = "";
         }
     }
 }

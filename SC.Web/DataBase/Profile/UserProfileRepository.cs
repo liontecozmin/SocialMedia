@@ -18,7 +18,7 @@ namespace SC.Web.DataBase.Profile
         {
             foreach (var user in context.UsersProfile)
             {
-                if (mail == user.email)
+                if (mail == user.Email)
                     return user;
             }
 

@@ -18,7 +18,7 @@ namespace SC.Web
         {
             foreach (var group in context.Groups)
             {
-                if (group_n == group.group_name && email == group.email)
+                if (group_n == group.Group_name && email == group.Email)
                     return group;
             }
 
@@ -29,7 +29,7 @@ namespace SC.Web
         {
             foreach (var group in context.Groups)
             {
-                if (group_n == group.group_name)
+                if (group_n == group.Group_name)
                     return group;
             }
 

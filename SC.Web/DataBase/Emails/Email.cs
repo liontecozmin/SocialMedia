@@ -9,31 +9,36 @@ namespace SC.Web
     public class Email
     {
         [Key]
-        public int id { get; set; }
-        public string from { get; set; }
-        public string to { get; set; }
-        public string subject { get; set; }
-        public string message { get; set; }
-        public DateTime emailDate { get; set; }
+        public int Id { get; set; }
+        [Required]
+        public string From { get; set; }
+        [Required]
+        public string To { get; set; }
+        [Required]
+        public string Subject { get; set; }
+        [Required]
+        public string Message { get; set; }
+        [Required]
+        public DateTime EmailDate { get; set; }
 
         public Email(string _from, string _to,string _subject,string _message, DateTime date)
         {
-            from = _from;
-            to = _to;
-            subject = _subject;
-            message = _message;
-            emailDate = date;
+            From = _from;
+            To = _to;
+            Subject = _subject;
+            Message = _message;
+            EmailDate = date;
 
         }
 
         public Email()
         {
-            id = 1000;
-            from = "";
-            to = "";
-            subject = "";
-            message = "";
-            emailDate = DateTime.Now;
+            Id = 1000;
+            From = "";
+            To = "";
+            Subject = "";
+            Message = "";
+            EmailDate = DateTime.Now;
 
         }
     }

@@ -15,13 +15,12 @@ namespace SC.Web
             context.Emails.Add(a);
             context.SaveChanges();
         }
-        
-        
-                public Email FindEmail(string from,string to, string subject1,string message1)
+
+        public Email FindEmail(string from,string to, string subject1,string message1)
         {
             foreach (var email in context.Emails)
             {
-                if (from==email.from && to==email.to && subject1 == email.subject && message1 == email.message)
+                if (from==email.From && to==email.To && subject1 == email.Subject && message1 == email.Message)
                     return email;
             }
 
