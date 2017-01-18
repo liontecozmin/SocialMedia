@@ -83,7 +83,7 @@ namespace SC.Web.Controllers
             var context = new UserProfileContext();
             var userRepository = new UserProfileRepository();
             var user1 = userRepository.FindByEmail(user.Email);
-            user1.firstName = model.firstName;
+            user1.FirstName = model.FirstName;
             context.Update(user1);
             context.SaveChanges();
             ViewData["StatusMessage"] = "Yourrr";
@@ -109,7 +109,7 @@ namespace SC.Web.Controllers
             var context = new UserProfileContext();
             var userRepository = new UserProfileRepository();
             var user1 = userRepository.FindByEmail(user.Email);
-            user1.lastName = model.lastName ;
+            user1.LastName = model.LastName ;
             context.Update(user1);
             context.SaveChanges();
             return RedirectToAction(nameof(Index), new { Message = ManageMessageId.SetPasswordSuccess });

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -50,7 +50,66 @@ namespace SC.Web.Controllers
             }
             catch (Exception e){}
         }
-        
+
+        public IActionResult Index()
+        {
+            GetUserMail();                            // Gasirea propriilor grupuri 
+            var context = new GroupContext();
+            Storage objects = new Storage();
+
+            objects.group = new List<Group>() { };
+            objects.size_group = 0;
+            int i = 0;
+            var group = new Group();
+
+            foreach (var group1 in context.Groups)
+            {
+                if (email_user == group1.Email)
+                {
+                    group.Group_name = group1.Group_name;
+                    group.Email = group1.Email;
+                    objects.group.Add(group);
+                    group = new Group();
+                    objects.size_group++;
+                    i++;
+                }
+            }
+            ViewBag.objects = objects;
+
+
+            var context1 = new PostContext();
+            Storage objects1 = new Storage();
+            objects1.post = new List<Post>() { };
+            objects1.size_post = 0;
+            i = 0;
+            var post = new Post();
+
+            foreach (var post1 in context1.Posts)
+            {
+                for(int j = 0; j < objects.size_group; j++)
+                {
+                    if (objects.group[j].Group_name == post1.Group)
+                    {
+                        post.Id = i + 1;
+                        post.Email = post1.Email;
+                        post.Message = post1.Message;
+                        post.Group = post1.Group;
+                        post.PostDate = post1.PostDate;
+                        objects1.post.Add(post);
+                        post = new Post();
+                        objects1.size_post++;
+                        i++;
+                    }
+
+                }
+               
+            }
+
+            ViewBag.objects1 = objects1;
+
+            return View();
+        }
+
         public IActionResult AddPost()
         {
             
@@ -74,7 +133,7 @@ namespace SC.Web.Controllers
             GetUserMail();
          //   var user = await GetCurrentUserAsync();
             var context = new PostContext();
-            var post = new Post(email_user, model.group, DateTime.Now, model.message);
+            var post = new Post(email_user, model.Group, DateTime.Now, model.Message);
             context.Posts.Add(post);
             context.SaveChanges();
             string mesaj = "Your post has been added";
@@ -103,14 +162,14 @@ namespace SC.Web.Controllers
                      
             foreach (var mail1 in context.Emails)
             {
-                if (email_user == mail1.to)
+                if (email_user == mail1.To)
                 {
-                    mail.id = i + 1 ;
-                    mail.from = mail1.from;
-                    mail.to = mail1.to;
-                    mail.subject = mail1.subject;
-                    mail.message = mail1.message;
-                    mail.emailDate = mail1.emailDate;
+                    mail.Id = i + 1 ;
+                    mail.From = mail1.From;
+                    mail.To = mail1.To;
+                    mail.Subject = mail1.Subject;
+                    mail.Message = mail1.Message;
+                    mail.EmailDate = mail1.EmailDate;
                     objects.mail.Add(mail);
                     mail = new Email();
                     objects.size++;
@@ -133,13 +192,13 @@ namespace SC.Web.Controllers
 
             foreach (var post1 in context.Posts)
             {
-                if (model.group == post1.group)
+                if (model.Group == post1.Group)
                 {
-                    post.id = i + 1;
-                    post.email = post1.email;
-                    post.message = post1.message;
-                    post.group = post1.group;
-                    post.postDate = post1.postDate;
+                    post.Id = i + 1;
+                    post.Email = post1.Email;
+                    post.Message = post1.Message;
+                    post.Group = post1.Group;
+                    post.PostDate = post1.PostDate;
                     objects.post.Add(post);
                     post = new Post();
                     objects.size_post++;
@@ -170,7 +229,7 @@ namespace SC.Web.Controllers
             var context = new EmailContext();
             var EmailRepository = new EmailRepository();
             var email1 = EmailRepository.FindEmail(from, to, subject, message);
-            if (email1.to == "")
+            if (email1.To == "")
             {
                 string err = "Something went wrong. Try again!";
                 ViewData["StatusMessage"] = err;
@@ -208,7 +267,7 @@ namespace SC.Web.Controllers
             // var user = await GetCurrentUserAsync();
             GetUserMail();
             var context = new EmailContext();
-            var email = new Email(email_user,model.to,model.subject,model.message,DateTime.Now);
+            var email = new Email(email_user,model.To,model.Subject,model.Message,DateTime.Now);
             context.Emails.Add(email);
             context.SaveChanges();
             string mesaj = "Your email was sent";
@@ -231,10 +290,10 @@ namespace SC.Web.Controllers
             // var user = await GetCurrentUserAsync();
             GetUserMail();
             var context = new GroupContext();
-            var group = new Group(email_user, model.group_name);
+            var group = new Group(email_user, model.Group_name);
             var GroupRepository = new GroupRepository();
-            var group1 = GroupRepository.FindGroup(model.group_name);
-            if(group1.group_name==group.group_name)
+            var group1 = GroupRepository.FindGroup(model.Group_name);
+            if(group1.Group_name==group.Group_name)
                 return View(model);
             context.Groups.Add(group);
             context.SaveChanges();
@@ -256,11 +315,11 @@ namespace SC.Web.Controllers
                         //var user = await GetCurrentUserAsync();
                          GetUserMail();
                         var context = new GroupContext();
-                        var group = new Group(email_user, model.group_name);
+                        var group = new Group(email_user, model.Group_name);
 
                         var GroupRepository = new GroupRepository();
-                        var group1 = GroupRepository.FindByGroupName(email_user, model.group_name);
-                        if (group1.group_name == group.group_name && group1.email==group.email)
+                        var group1 = GroupRepository.FindByGroupName(email_user, model.Group_name);
+                        if (group1.Group_name == group.Group_name && group1.Email==group.Email)
                             return View(model);
 
                         context.Groups.Add(group);
@@ -288,13 +347,13 @@ namespace SC.Web.Controllers
                 ok = 1;
                 foreach (var group2 in objects.group)
                 {
-                    if (group1.group_name == group2.group_name)
+                    if (group1.Group_name == group2.Group_name)
                         ok = 0;
                 }
                 if (ok == 0)
                     continue;
-                group.group_name = group1.group_name;
-                group.email = group1.email;
+                group.Group_name = group1.Group_name;
+                group.Email = group1.Email;
                 objects.group.Add(group);
                     group= new Group();
                     objects.size_group++;
@@ -318,10 +377,10 @@ namespace SC.Web.Controllers
 
             foreach (var group1 in context.Groups)
             {
-                if (email_user == group1.email)
+                if (email_user == group1.Email)
                 {
-                    group.group_name = group1.group_name;
-                    group.email = group1.email;
+                    group.Group_name = group1.Group_name;
+                    group.Email = group1.Email;
                     objects.group.Add(group);
                     group = new Group();
                     objects.size_group++;
@@ -346,8 +405,8 @@ namespace SC.Web.Controllers
            GetUserMail();
             var context = new GroupContext();
             var GroupRepository = new GroupRepository();
-            var group1 = GroupRepository.FindByGroupName(email_user, model.group_name);
-            if(group1.group_name=="")
+            var group1 = GroupRepository.FindByGroupName(email_user, model.Group_name);
+            if(group1.Group_name=="")
                 return View(model);
             context.Remove(group1);
             context.SaveChanges();
@@ -381,6 +440,7 @@ namespace SC.Web.Controllers
                     _logger.LogInformation(1, "User logged in.");
                     HttpContext.Session.SetString("email", model.Email);
 
+                    return RedirectToAction(nameof(AccountController.Index));
                     return RedirectToLocal(returnUrl);
                 }
                   
@@ -430,6 +490,7 @@ namespace SC.Web.Controllers
                     Group group1 = new Group(user.Email, "FII");
                     context1.Add(group1);
                     context1.SaveChanges();
+                    return RedirectToAction(nameof(AccountController.Index));
                     return RedirectToLocal(returnUrl);
                 }
                 AddErrors(result);
@@ -444,7 +505,8 @@ namespace SC.Web.Controllers
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation(4, "User logged out.");
-            return RedirectToAction(nameof(HomeController.Index),"Home");
+            return RedirectToAction(nameof(AccountController.Index));
+            return RedirectToAction(nameof(AccountController.Index),"Home");
         }
 
      
@@ -466,11 +528,12 @@ namespace SC.Web.Controllers
         {
             if (Url.IsLocalUrl(returnUrl))
             {
+                return RedirectToAction(nameof(AccountController.Index));
                 return Redirect(returnUrl);
             }
             else
             {
-                return RedirectToAction(nameof(HomeController.Index),"Home");
+                return RedirectToAction(nameof(AccountController.Index));
             }
         }
  
