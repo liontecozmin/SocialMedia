@@ -50,6 +50,32 @@ namespace SC.Web.Controllers
             }
             catch (Exception e){}
         }
+        public IActionResult ViewAllNames()
+{
+    int number = 0;
+    // var user = await GetCurrentUserAsync();
+    GetUserMail();
+    var context = new UserProfileContext();
+    Storage objects = new Storage();
+    objects.UserProfile = new List<UserProfile>() { };
+    objects.size_user = 0;
+    int i = 0;
+    var user = new UserProfile();
+
+    foreach (var user1 in context.UsersProfile)
+        {
+            user.Id = i + 1;
+            user.Email = user1.Email;
+            user.FirstName = user1.FirstName;
+            user.LastName = user1.LastName;
+            objects.UserProfile.Add(user);
+                user = new UserProfile();
+                objects.size_user++;
+            i++;
+        }
+    
+    return View(objects);
+}
 
         public IActionResult Index()
         {
